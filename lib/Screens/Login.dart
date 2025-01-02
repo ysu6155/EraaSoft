@@ -1,6 +1,6 @@
 import 'package:eraasoft/Screens/Register.dart';
 import 'package:eraasoft/Widgets/eraasoftlogo.dart';
-import 'package:eraasoft/Widgets/textformfield.dart';
+import 'package:eraasoft/Widgets/Form_Login.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -33,7 +33,7 @@ class Login extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 32),
-                CustomTixtForm(),
+                Form_Login(),
                 SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

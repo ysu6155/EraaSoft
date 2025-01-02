@@ -1,23 +1,19 @@
 import 'package:eraasoft/Screens/Home.dart';
 import 'package:flutter/material.dart';
 
-class CustomTixtForm extends StatefulWidget {
-  CustomTixtForm({super.key });
+class Form_Register extends StatefulWidget {
+  Form_Register({super.key });
 
   @override
-  State<CustomTixtForm> createState() => _CustomTixtFormState();
+  State<Form_Register> createState() => _Form_RegisterState();
 }
 
-class _CustomTixtFormState extends State<CustomTixtForm> {
-
+class _Form_RegisterState extends State<Form_Register> {
+  TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   final formKey = GlobalKey<FormState>();
   TextEditingController password = TextEditingController();
   bool isPasswordVisible = false;
-
-  bool isOption1Selected = false;
-
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -25,6 +21,28 @@ class _CustomTixtFormState extends State<CustomTixtForm> {
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Align(alignment: Alignment.centerLeft,
+                child: Text("Name",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
+            SizedBox(
+              height: 12,
+            ),
+            TextFormField(
+              controller: name,
+              decoration: InputDecoration(
+                hintText: "Ahmed Mohamed",
+                hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
+              ),
+              keyboardType: TextInputType.text,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "الرجاء إدخال الاسم ";
+                }
+                return null;
+              },
+            ),
+            SizedBox(
+              height: 16,
+            ),
             Align(alignment: Alignment.centerLeft,
                 child: Text("Email",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
             SizedBox(
@@ -35,10 +53,6 @@ class _CustomTixtFormState extends State<CustomTixtForm> {
               decoration: InputDecoration(
                 hintText: "example@mail.com",
                 hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20)
-
-                ),
               ),
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
@@ -66,9 +80,6 @@ class _CustomTixtFormState extends State<CustomTixtForm> {
               decoration: InputDecoration(
                 hintText: "password",
                 hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20)
-                ),
                 suffixIcon: IconButton(
                   icon:isPasswordVisible ?  Icon(Icons.visibility):Icon( Icons.visibility_off,),
                   onPressed: () {
@@ -100,16 +111,15 @@ class _CustomTixtFormState extends State<CustomTixtForm> {
                 ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Home(),
-                          ),
-                        ) ;
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(),
+                      ),
+                    ) ;
                   }
                 },
-                child: Text("Login",style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1),fontWeight: FontWeight.bold,fontSize: 20),),
+                child: Text("Register",style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1),fontWeight: FontWeight.bold,fontSize: 20),),
               ),
             ),
           ],

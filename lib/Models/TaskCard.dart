@@ -23,49 +23,40 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: iconBackgroundColor,
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-            ),
-            child: Icon(icon),
+    return
+      ListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 0), // المسافات الداخلية
+        leading: Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: iconBackgroundColor, // نفس متغير لون خلفية الأيقونة
+            borderRadius: BorderRadius.all(Radius.circular(8)),
           ),
-          SizedBox(
-            width: 8, // المسافة بين الأيقونة والنص
+          child: Icon(icon), // نفس الأيقونة المستخدمة
+        ),
+        title: Text(
+          title, // نفس عنوان العنصر
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 14,
+            color: Colors.white, // نفس اللون الافتراضي
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: Colors.white, // استخدام اللون الافتراضي الأبيض للنص
-                ),
-              ),
-              Text(
-                "$taskCount Task",
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12,
-                  color: tixtColor, // استخدام اللون الافتراضي للنص الفرعي
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
+        ),
+        subtitle: Text(
+          "$taskCount Task", // نفس النص الفرعي
+          style: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 12,
+            color: tixtColor, // نفس اللون الافتراضي للنص الفرعي
+          ),
+        ),
+        tileColor: backgroundColor, // نفس لون الخلفية
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)), // نفس الحواف الدائرية
+        ),
+        onTap: () {
+        },
+      );
   }
 }

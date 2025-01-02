@@ -1,73 +1,98 @@
-import 'package:eraasoft/Screens/Home.dart';
+import 'package:eraasoft/Models/TabItem.dart';
 import 'package:flutter/material.dart';
+import 'package:eraasoft/Screens/Home.dart';
+import 'package:eraasoft/Screens/CreateTask.dart';
 
 class TapBarScreen extends StatefulWidget {
-  const TapBarScreen({super.key});
 
   @override
   State<TapBarScreen> createState() => _TapBarScreenState();
-
 }
 
-class _TapBarScreenState extends State<TapBarScreen> with SingleTickerProviderStateMixin {
-late  TabController tabController;
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 3, vsync: this); // عدد التابات
-  }
+class _TapBarScreenState extends State<TapBarScreen> {
+  int currentIndex = 0;
+
+
+  final List<TabItem> tabItems = [
+    TabItem(
+      icon: Icons.home_outlined,
+      label: "Home",
+
+    ),
+    TabItem(
+      icon: Icons.add,
+      label: "Add Task",
+
+    ),
+    TabItem(
+      icon: Icons.person_outline_sharp,
+      label: "Profile",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> screens = [
+      Home(),
+      CreateTask(onBackPressed: () => setState(() => currentIndex = 0)),
+      const Center(child: Text("Profile")),
+    ];
     return Scaffold(
-
       body: Stack(
         children: [
-          TabBarView(
-            controller: tabController,
-            children: [
-              Home(),
-              Center(child: Text("Search")),
-              Center(child: Text("Profile")),
-            ],
-          ),
-          Positioned(
-            bottom: 16,
-            right: 0,
-            left: 0,
-            child: Container(
-              height: 80,
-              padding: EdgeInsets.symmetric(horizontal: 100, vertical: 12),
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16), // الحواف
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(221, 226, 243, 1), // لون الخلفية
-                borderRadius: BorderRadius.circular(100), // الحواف الدائرية
-              ),
-              child: TabBar(
-                controller: tabController,
-                labelColor: Colors.white, // لون الأيقونات المحددة
-                unselectedLabelColor: Colors.black,
-                indicatorSize: TabBarIndicatorSize.tab,
-
-                indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100), // حواف المؤشر
-                  color: Color.fromRGBO(34, 67, 164, 1), // لون المؤشر
-                ),
-                dividerHeight: 0,
-                tabs: [
-                  Tab(icon: Icon(Icons.home_outlined,size: 30,), ),
-                  Tab(icon: Icon(Icons.add, size: 30)),
-                  Tab(icon: Icon(Icons.person_outline_sharp, size: 30)),
-                ],
-              ),
+      screens[currentIndex],
+         Align(
+           alignment: Alignment.bottomCenter,
+           child: Container(
+             margin: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+            height: 80,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(221, 226, 243, 1),
+              borderRadius: BorderRadius.circular(100),
             ),
-          ),
-        ],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(tabItems.length, (index) {
+                final tabItem = tabItems[index];
+                return InkWell(
+                  onTap: () => setState(() => currentIndex = index),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 56,
+                    width: currentIndex == index ? 175 : 56,
+                    decoration: BoxDecoration(
+                      color: currentIndex == index
+                          ? Color.fromRGBO(34, 67, 164, 1)
+                          :  Color.fromRGBO(231, 235, 247, 1),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          tabItem.icon,
+                          size: 30,
+                          color: currentIndex == index
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                        if (currentIndex == index)
+                          Text(
+                            "  ${tabItem.label}",
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                          ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            ),
+
+                   ),
+         ),
+      ],
       ),
-      // التاب بار العائم
-
-
-
-);
+    );
   }
 }

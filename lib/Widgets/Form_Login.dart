@@ -1,19 +1,23 @@
 import 'package:eraasoft/Screens/Home.dart';
 import 'package:flutter/material.dart';
 
-class CustomTixtFormR extends StatefulWidget {
-  CustomTixtFormR({super.key });
+class Form_Login extends StatefulWidget {
+  Form_Login({super.key });
 
   @override
-  State<CustomTixtFormR> createState() => _CustomTixtFormRState();
+  State<Form_Login> createState() => _Form_LoginState();
 }
 
-class _CustomTixtFormRState extends State<CustomTixtFormR> {
-  TextEditingController name = TextEditingController();
+class _Form_LoginState extends State<Form_Login> {
+
   TextEditingController email = TextEditingController();
   final formKey = GlobalKey<FormState>();
   TextEditingController password = TextEditingController();
   bool isPasswordVisible = false;
+
+  bool isOption1Selected = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -21,32 +25,6 @@ class _CustomTixtFormRState extends State<CustomTixtFormR> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Align(alignment: Alignment.centerLeft,
-                child: Text("Name",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
-            SizedBox(
-              height: 12,
-            ),
-            TextFormField(
-              controller: name,
-              decoration: InputDecoration(
-                hintText: "Ahmed Mohamed",
-                hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20)
-
-                ),
-              ),
-              keyboardType: TextInputType.text,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "الرجاء إدخال الاسم ";
-                }
-                return null;
-              },
-            ),
-            SizedBox(
-              height: 16,
-            ),
             Align(alignment: Alignment.centerLeft,
                 child: Text("Email",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
             SizedBox(
@@ -57,14 +35,10 @@ class _CustomTixtFormRState extends State<CustomTixtFormR> {
               decoration: InputDecoration(
                 hintText: "example@mail.com",
                 hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20)
-
-                ),
               ),
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value == null || value.trim().isEmpty) {
                   return "الرجاء إدخال البريد الإلكتروني";
                 } else if (!RegExp(r"^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$")
                     .hasMatch(value)) {
@@ -82,15 +56,12 @@ class _CustomTixtFormRState extends State<CustomTixtFormR> {
               height: 12,
             ),
             TextFormField(
-
               controller: password,
               obscureText: !isPasswordVisible, // إخفاء كلمة المرور
               decoration: InputDecoration(
                 hintText: "password",
                 hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20)
-                ),
+
                 suffixIcon: IconButton(
                   icon:isPasswordVisible ?  Icon(Icons.visibility):Icon( Icons.visibility_off,),
                   onPressed: () {
@@ -115,22 +86,23 @@ class _CustomTixtFormRState extends State<CustomTixtFormR> {
               height: 48,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
+                  shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12)), // إلغاء الحواف
                   ),
                   backgroundColor: Color.fromRGBO(34, 67, 164, 1),
                 ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Home(),
-                      ),
-                    ) ;
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Home(),
+                          ),
+                        ) ;
+
                   }
                 },
-                child: Text("Register",style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1),fontWeight: FontWeight.bold,fontSize: 20),),
+                child: Text("Login",style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1),fontWeight: FontWeight.bold,fontSize: 20),),
               ),
             ),
           ],
