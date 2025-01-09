@@ -1,3 +1,6 @@
+import 'package:eraasoft/utils/app_Assets.dart';
+import 'package:eraasoft/utils/app_Text.dart';
+import 'package:eraasoft/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 void ChangeStatus(BuildContext context) {
@@ -11,24 +14,24 @@ void ChangeStatus(BuildContext context) {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-          Image.asset("assets/Images/Animation.gif"),
+          Image.asset(AppAssets.animationIcon),
             SizedBox(height: 16),
             Text(
-              "Task Status Changed Successfully",
+                AppText.taskStatusChangedSuccessfully,
               style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: Colors.black),
+                  color: AppColor.black),
             ),
             SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context); // إغلاق المودال عند الضغط على الزر
               },
-              child: Text("Finish"),
+              child: Text(AppText.finish),
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Color.fromRGBO(34, 67, 164, 1),
+                foregroundColor: AppColor.white,
+                backgroundColor: AppColor.app,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

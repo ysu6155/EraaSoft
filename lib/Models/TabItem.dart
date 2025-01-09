@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TabItem {
-  final IconData icon;
+  final String icon;
   final String label;
 
 

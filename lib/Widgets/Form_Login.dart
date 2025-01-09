@@ -1,22 +1,22 @@
 import 'package:eraasoft/Screens/Home.dart';
+import 'package:eraasoft/Screens/TapBarScreen.dart';
+import 'package:eraasoft/utils/app_Text.dart';
 import 'package:flutter/material.dart';
 
 class Form_Login extends StatefulWidget {
-  Form_Login({super.key });
+  Form_Login({super.key});
 
   @override
   State<Form_Login> createState() => _Form_LoginState();
 }
 
 class _Form_LoginState extends State<Form_Login> {
-
   TextEditingController email = TextEditingController();
   final formKey = GlobalKey<FormState>();
   TextEditingController password = TextEditingController();
   bool isPasswordVisible = false;
 
   bool isOption1Selected = false;
-
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +25,20 @@ class _Form_LoginState extends State<Form_Login> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Align(alignment: Alignment.centerLeft,
-                child: Text("Email",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                 AppText.email,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                )),
             SizedBox(
               height: 12,
             ),
             TextFormField(
               controller: email,
               decoration: InputDecoration(
-                hintText: "example@mail.com",
-                hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
+                hintText: AppText.hintEmail,
+                hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
@@ -50,8 +54,12 @@ class _Form_LoginState extends State<Form_Login> {
             SizedBox(
               height: 16,
             ),
-            Align(alignment: Alignment.centerLeft,
-                child: Text("Password",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  AppText.password,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                )),
             SizedBox(
               height: 12,
             ),
@@ -59,11 +67,14 @@ class _Form_LoginState extends State<Form_Login> {
               controller: password,
               obscureText: !isPasswordVisible, // إخفاء كلمة المرور
               decoration: InputDecoration(
-                hintText: "password",
-                hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
-
+                hintText: AppText.password,
+                hintStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                 suffixIcon: IconButton(
-                  icon:isPasswordVisible ?  Icon(Icons.visibility):Icon( Icons.visibility_off,),
+                  icon: isPasswordVisible
+                      ? Icon(Icons.visibility)
+                      : Icon(
+                          Icons.visibility_off,
+                        ),
                   onPressed: () {
                     setState(() {
                       isPasswordVisible = !isPasswordVisible;
@@ -87,22 +98,29 @@ class _Form_LoginState extends State<Form_Login> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(12)), // إلغاء الحواف
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(12)), // إلغاء الحواف
                   ),
                   backgroundColor: Color.fromRGBO(34, 67, 164, 1),
                 ),
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Home(),
-                          ),
-                        ) ;
-
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TapBarScreen(),
+                      ),
+                      (route) => false,
+                    );
                   }
                 },
-                child: Text("Login",style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1),fontWeight: FontWeight.bold,fontSize: 20),),
+                child: Text(
+                 AppText.login,
+                  style: TextStyle(
+                      color: Color.fromRGBO(255, 255, 255, 1),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
               ),
             ),
           ],
@@ -110,5 +128,4 @@ class _Form_LoginState extends State<Form_Login> {
       ),
     );
   }
-
 }

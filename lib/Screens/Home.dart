@@ -1,53 +1,63 @@
-import 'package:eraasoft/Models/ChangeTaskStatus.dart';
 import 'package:eraasoft/Models/TaskCard.dart';
-import 'package:eraasoft/Screens/Login.dart';
-import 'package:eraasoft/Widgets/RecentTasksSection.dart';
+import 'package:eraasoft/Models/tasks_data.dart';
+import 'package:eraasoft/Screens/Completed.dart';
+import 'package:eraasoft/Screens/In%20Progress%20Tasks.dart';
+import 'package:eraasoft/Screens/OutDated.dart';
+import 'package:eraasoft/Screens/newTask.dart';
+import 'package:eraasoft/utils/app_Assets.dart';
+import 'package:eraasoft/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:eraasoft/Widgets/RecentTasksSection.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:eraasoft/utils/app_Text.dart';
 
 class Home extends StatelessWidget {
    Home({super.key});
-List<Widget> Cards = [
+List<Widget> cards = [
   TaskCard(
-    title: "New Tasks",
-    taskCount: 12,
-    icon: Icons.account_box_outlined,
-    backgroundColor: Color.fromRGBO(86, 121, 221, 1),
-    iconBackgroundColor: Color.fromRGBO(
-        137, 161, 231, 1),
-    tixtColor: Color.fromRGBO(187, 201, 241, 1),
-  ),
-  TaskCard(
-    title: "In Progress",
-    taskCount: 12,
-    icon: Icons.account_box_outlined,
-    backgroundColor: Color.fromRGBO(239, 150, 69, 1),
-    iconBackgroundColor: Color.fromRGBO(
-        244, 181, 125, 1),
-    tixtColor: Color.fromRGBO(250, 223, 199, 1),
-  ),
-  TaskCard(
-    title: "Out Dated",
-    taskCount: 12,
-    icon: Icons.account_box_outlined,
-    backgroundColor: Color.fromRGBO(220, 68, 129, 1),
-    iconBackgroundColor: Color.fromRGBO(
-        231, 124, 167, 1),
-    tixtColor: Color.fromRGBO(252, 203, 226, 1),
-  ),
-  TaskCard(
-      title: "Completed",
-      taskCount: 12,
-      icon: Icons.account_box_outlined,
-      backgroundColor: Color.fromRGBO(100, 207, 180, 1),
-      iconBackgroundColor: Color.fromRGBO(
-          131, 217, 194, 1),
-      tixtColor: Color.fromRGBO(210, 244, 235, 1)),
-];
 
+    title: AppText.newTasks,
+    taskCount: tasks[AppText.newTasks]?.length ,
+    icon: AppAssets.iconNawTask,
+    backgroundColor: AppColor.nweTask,
+    iconBackgroundColor: AppColor.nweTaskLight,
+    textColor: AppColor.nweTaskText,
+  ),
+  TaskCard(
+    title: AppText.inProgress,
+    taskCount: tasks[ AppText.inProgress]?.length ,
+    icon: AppAssets.iconInProgress,
+    backgroundColor: AppColor.inProgress,
+    iconBackgroundColor: AppColor.inProgressLight,
+    textColor: AppColor.inProgressText,
+  ),
+  TaskCard(
+    title: AppText.outDated,
+    taskCount: tasks[ AppText.outDated]?.length ,
+    icon:AppAssets.iconOutDated,
+    backgroundColor: AppColor.outDated,
+    iconBackgroundColor: AppColor.outDatedLight,
+    textColor:AppColor.outDatedText,
+  ),
+  TaskCard(
+      title: AppText.completed,
+      taskCount: tasks[AppText.completed]?.length ,
+      icon: AppAssets.iconCompleted,
+      backgroundColor: AppColor.completed,
+      iconBackgroundColor:AppColor.completedLight,
+      textColor: AppColor.completedText,),
+];
+   List<Widget> screens = [
+    newTask(),
+     InProgressTasks(),
+     Outdated(),
+     Completed()
+   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: ListView(
@@ -56,33 +66,31 @@ List<Widget> Cards = [
                 height: 8,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Hello 👋",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 14),
-                      ),
-                      Text(
-                        "Ahmed Mohamed",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 16),
-                      ),
-                    ],
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                         AppText.hello,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 14),
+                        ),
+                        Text(
+                          AppText.ahmedMohamed,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                   InkWell(
-                    radius: 8,
                     onTap: () {},
-                    child: Container(
-                      height: 48,
-                      width: 48,
-                      decoration: BoxDecoration(
-                          color: Color.fromRGBO(245, 245, 245, 1),
-                          borderRadius: BorderRadius.all(Radius.circular(100))),
-                      child: Icon(Icons.alarm),
+                    child: CircleAvatar(
+                      radius: 25,
+                      backgroundColor: AppColor.iconBackground,
+
+                      child:SvgPicture.asset(AppAssets.iconAlarm)
                     ),
                   ),
                 ],
@@ -98,11 +106,19 @@ List<Widget> Cards = [
                   crossAxisCount: 2,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
-                  childAspectRatio: 2.9,
+                  childAspectRatio: 2.5,
                 ),
-                itemCount: 4,
+                itemCount: cards.length,
                 itemBuilder: (context, index) {
-                  return Cards[index];
+                  return InkWell(child: cards[index],
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => screens[index],
+                      ),
+                    );
+                  },);
                 },
               ),
               SizedBox(
@@ -112,33 +128,7 @@ List<Widget> Cards = [
               SizedBox(
                 height: 16,
               ),
-              Row(
-                children: [
-                  Text(
-                    "Recent Tasks",
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 16,
-              ),
-              ListView.separated(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                    return RecentTasksSection();
-                  },
-                 separatorBuilder: (context, index) {
-                   return   SizedBox(
-                     height: 16,
-                   );
-                 },
-                  itemCount: 5,
-              )
+              RecentTasksSection(),
 
             ],
           ),

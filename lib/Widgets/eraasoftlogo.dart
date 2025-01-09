@@ -1,3 +1,5 @@
+import 'package:eraasoft/utils/app_Assets.dart';
+import 'package:eraasoft/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class eraasoftlogo extends StatelessWidget {
@@ -9,7 +11,7 @@ class eraasoftlogo extends StatelessWidget {
       width: 375,
       height: 188,
       decoration: BoxDecoration(
-        color: Color.fromRGBO(244, 246, 250, 1),
+        color: AppColor.appLight,
         borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(180),
           bottomLeft: Radius.circular(180),
@@ -19,7 +21,7 @@ class eraasoftlogo extends StatelessWidget {
         children: [
           SizedBox(height: 71),
           Image.asset(
-            "assets/Images/eraasoft.png",
+            AppAssets.eraaSoftLogo,
             height: 101,
             width: 101,
           ),

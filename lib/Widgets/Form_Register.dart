@@ -1,4 +1,5 @@
 import 'package:eraasoft/Screens/Home.dart';
+import 'package:eraasoft/utils/app_Text.dart';
 import 'package:flutter/material.dart';
 
 class Form_Register extends StatefulWidget {
@@ -22,14 +23,14 @@ class _Form_RegisterState extends State<Form_Register> {
         child: Column(
           children: [
             Align(alignment: Alignment.centerLeft,
-                child: Text("Name",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
+                child: Text(AppText.name,style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
             SizedBox(
               height: 12,
             ),
             TextFormField(
               controller: name,
               decoration: InputDecoration(
-                hintText: "Ahmed Mohamed",
+                hintText: AppText.ahmedMohamed,
                 hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
               ),
               keyboardType: TextInputType.text,
@@ -44,14 +45,14 @@ class _Form_RegisterState extends State<Form_Register> {
               height: 16,
             ),
             Align(alignment: Alignment.centerLeft,
-                child: Text("Email",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
+                child: Text(AppText.email,style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
             SizedBox(
               height: 12,
             ),
             TextFormField(
               controller: email,
               decoration: InputDecoration(
-                hintText: "example@mail.com",
+                hintText: AppText.hintEmail,
                 hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
               ),
               keyboardType: TextInputType.emailAddress,
@@ -69,7 +70,7 @@ class _Form_RegisterState extends State<Form_Register> {
               height: 16,
             ),
             Align(alignment: Alignment.centerLeft,
-                child: Text("Password",style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
+                child: Text(   AppText.password,style: TextStyle(fontSize: 16,fontWeight:FontWeight.w500 ),)),
             SizedBox(
               height: 12,
             ),
@@ -78,7 +79,7 @@ class _Form_RegisterState extends State<Form_Register> {
               controller: password,
               obscureText: !isPasswordVisible, // إخفاء كلمة المرور
               decoration: InputDecoration(
-                hintText: "password",
+                hintText:   AppText.password,
                 hintStyle: TextStyle(fontSize: 14,fontWeight: FontWeight.w400),
                 suffixIcon: IconButton(
                   icon:isPasswordVisible ?  Icon(Icons.visibility):Icon( Icons.visibility_off,),
@@ -119,7 +120,7 @@ class _Form_RegisterState extends State<Form_Register> {
                     ) ;
                   }
                 },
-                child: Text("Register",style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1),fontWeight: FontWeight.bold,fontSize: 20),),
+                child: Text(AppText.register,style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1),fontWeight: FontWeight.bold,fontSize: 20),),
               ),
             ),
           ],

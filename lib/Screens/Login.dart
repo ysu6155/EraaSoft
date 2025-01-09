@@ -1,6 +1,8 @@
 import 'package:eraasoft/Screens/Register.dart';
 import 'package:eraasoft/Widgets/eraasoftlogo.dart';
 import 'package:eraasoft/Widgets/Form_Login.dart';
+import 'package:eraasoft/utils/app_Text.dart';
+import 'package:eraasoft/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -19,14 +21,14 @@ class Login extends StatelessWidget {
               children: [
                 SizedBox(height: 56),
                 Text(
-                  "Login",
+                  AppText.login,
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 Text(
-                  "Login to your account",
+                  AppText.supLogin,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -39,9 +41,9 @@ class Login extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don’t have an account?",
+                     AppText.doNotHaveAnAccount,
                       style: TextStyle(
-                        color: Color.fromRGBO(18, 18, 18, 1),
+                        color: AppColor.textBlack,
                         fontWeight: FontWeight.w500,
                         fontSize: 12,
                       ),
@@ -56,9 +58,9 @@ class Login extends StatelessWidget {
                         );
                       },
                       child: Text(
-                        "Create account",
+                        AppText.createAccount,
                         style: TextStyle(
-                          color: Color.fromRGBO(34, 67, 164, 1),
+                          color: AppColor.app,
                           fontWeight: FontWeight.w500,
                           fontSize: 12,
                         ),

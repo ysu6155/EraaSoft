@@ -1,3 +1,4 @@
+import 'package:eraasoft/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData Theme1 =ThemeData(
@@ -8,7 +9,7 @@ inputDecorationTheme: InputDecorationTheme(
       borderRadius: BorderRadius.circular(20)
   ),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Color.fromRGBO(34, 67, 164, 1),),
+      borderSide: BorderSide(color: AppColor.app,),
     borderRadius: BorderRadius.circular(20)
 
 ),

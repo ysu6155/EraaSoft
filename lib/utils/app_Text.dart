@@ -1,0 +1,35 @@
+class AppText {
+  static String name = "Name";
+  static String title = "";
+  static String login = "Login";
+  static String supLogin = "Login to your account";
+  static String email = "Email";
+  static String hintEmail = "example@email.com";
+  static String password = "Password";
+  static String doNotHaveAnAccount = "Don’t have an account?";
+  static String createAccount = "Create Account";
+  static String supRegister = "Create a new account for free";
+  static String ahmedMohamed = "Ahmed Mohamed";
+  static String register = "Register";
+  static String alreadyHaveAnAccount = "Already have an account?";
+  static String hello = "Hello 👋";
+  static String newTasks = "New Tasks";
+  static String inProgress = "In Progress";
+  static String completed =  "Completed";
+  static String outDated = "Out Dated";
+  static String task = "Task";
+  static String recentTasks = "Recent Tasks";
+  static String filter = "Filter";
+  static String home = "Home";
+  static String addTask = "Add Task";
+  static String taskName = "Task Name";
+  static String noe = "Note";
+  static String date = "Date";
+  static String createTask = "Create Task";
+  static String profile = "Profile";
+  static String taskStatusChangedSuccessfully = "Task Status Changed Successfully";
+  static String finish = "Finish";
+  static String changeTaskStatus = "Change Task Status";
+  static String taskCreatedSuccessfully = "Task Created Successfully";
+  static String changeStatus = "Change Status";
+}

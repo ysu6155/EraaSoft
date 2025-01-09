@@ -1,7 +1,12 @@
 import 'package:eraasoft/Models/TabItem.dart';
+import 'package:eraasoft/Screens/Profile.dart';
+import 'package:eraasoft/utils/app_Text.dart';
+import 'package:eraasoft/utils/app_colors.dart';
+import 'package:eraasoft/utils/app_Assets.dart';
 import 'package:flutter/material.dart';
 import 'package:eraasoft/Screens/Home.dart';
 import 'package:eraasoft/Screens/CreateTask.dart';
+import 'package:flutter_svg/svg.dart';
 
 class TapBarScreen extends StatefulWidget {
 
@@ -15,18 +20,18 @@ class _TapBarScreenState extends State<TapBarScreen> {
 
   final List<TabItem> tabItems = [
     TabItem(
-      icon: Icons.home_outlined,
-      label: "Home",
+      icon: AppAssets.iconHome,
+      label: AppText.home,
 
     ),
     TabItem(
-      icon: Icons.add,
-      label: "Add Task",
+      icon: AppAssets.iconAddTask,
+      label: AppText.addTask,
 
     ),
     TabItem(
-      icon: Icons.person_outline_sharp,
-      label: "Profile",
+      icon:  AppAssets.iconProfile,
+      label: AppText.profile,
     ),
   ];
 
@@ -35,20 +40,22 @@ class _TapBarScreenState extends State<TapBarScreen> {
     final List<Widget> screens = [
       Home(),
       CreateTask(onBackPressed: () => setState(() => currentIndex = 0)),
-      const Center(child: Text("Profile")),
+      Profile(onBackPressed: () => setState(() => currentIndex = 0))
     ];
     return Scaffold(
+
       body: Stack(
         children: [
       screens[currentIndex],
          Align(
            alignment: Alignment.bottomCenter,
            child: Container(
-             margin: EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+
+             margin: EdgeInsets.symmetric(horizontal: 16,vertical: 24),
             height: 80,
             padding: EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(221, 226, 243, 1),
+              color: AppColor.bottomNavigationBackground,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Row(
@@ -63,24 +70,24 @@ class _TapBarScreenState extends State<TapBarScreen> {
                     width: currentIndex == index ? 175 : 56,
                     decoration: BoxDecoration(
                       color: currentIndex == index
-                          ? Color.fromRGBO(34, 67, 164, 1)
-                          :  Color.fromRGBO(231, 235, 247, 1),
+                          ? AppColor.app
+                          :  AppColor.iconBottomNavigationBackground,
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(
+                        SvgPicture.asset(
                           tabItem.icon,
-                          size: 30,
+
                           color: currentIndex == index
-                              ? Colors.white
-                              : Colors.black,
+                              ? AppColor.white
+                              : AppColor.black,
                         ),
                         if (currentIndex == index)
                           Text(
                             "  ${tabItem.label}",
-                            style: TextStyle(fontSize: 14, color: Colors.white),
+                            style: TextStyle(fontSize: 14, color: AppColor.white),
                           ),
                       ],
                     ),
